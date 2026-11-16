@@ -21,24 +21,32 @@ public abstract class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    /** Espera a que el elemento se vea en pantalla y lo devuelve */
+    /**
+     * Espera a que el elemento se vea en pantalla y lo devuelve
+     */
     protected WebElement esperarVisible(By localizador) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(localizador));
     }
 
-    /** Espera a que el elemento se pueda presionar y le da clic */
+    /**
+     * Espera a que el elemento se pueda presionar y le da clic
+     */
     protected void clic(By localizador) {
         wait.until(ExpectedConditions.elementToBeClickable(localizador)).click();
     }
 
-    /** Borra el campo y escribe el texto indicado */
+    /**
+     * Borra el campo y escribe el texto indicado
+     */
     protected void escribir(By localizador, String texto) {
         WebElement campo = esperarVisible(localizador);
         campo.clear();
         campo.sendKeys(texto);
     }
 
-    /** Devuelve el texto visible de un elemento */
+    /**
+     * Devuelve el texto visible de un elemento
+     */
     protected String obtenerTexto(By localizador) {
         return esperarVisible(localizador).getText();
     }

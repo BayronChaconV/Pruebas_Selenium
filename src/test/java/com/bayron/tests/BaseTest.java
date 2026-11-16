@@ -21,7 +21,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 /*
  * Prepara y cierra el navegador antes y despues de cada caso de prueba
- * Al final de cada caso guarda una captura de pantalla en target/capturas.
+ * Al final de cada caso guarda una captura de pantalla en target/capturas
  */
 public abstract class BaseTest {
 
