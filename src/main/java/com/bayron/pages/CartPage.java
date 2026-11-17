@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 public class CartPage extends BasePage {
 
     private final By nombresProductos = By.className("inventory_item_name");
+    private final By botonCheckout = By.id("checkout");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -21,5 +22,9 @@ public class CartPage extends BasePage {
         return driver.findElements(nombresProductos).stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
+    }
+
+    public void irACheckout() {
+        clic(botonCheckout);
     }
 }

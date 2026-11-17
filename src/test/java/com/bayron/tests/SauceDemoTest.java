@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import com.bayron.pages.CheckoutPage;
 import com.bayron.pages.CartPage;
 import com.bayron.pages.InventoryPage;
 import com.bayron.pages.LoginPage;
@@ -90,5 +91,23 @@ public class SauceDemoTest extends BaseTest {
         Collections.sort(preciosEsperados);
 
         assertEquals(preciosEsperados, preciosObtenidos);
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("CP-06 Completar una compra")
+    void cp06_completarCompra() {
+        new LoginPage(driver).abrir().iniciarSesion(USUARIO_VALIDO, CLAVE);
+        InventoryPage catalogo = new InventoryPage(driver);
+        catalogo.agregarAlCarrito(PRODUCTO_ID);
+        catalogo.irAlCarrito();
+        new CartPage(driver).irACheckout();
+
+        CheckoutPage compra = new CheckoutPage(driver);
+        compra.llenarDatos("Bayron", "Chacon", "10101");
+        compra.continuar();
+        compra.finalizar();
+
+        assertEquals("Thank you for your order!", compra.obtenerMensajeFinal());
     }
 }

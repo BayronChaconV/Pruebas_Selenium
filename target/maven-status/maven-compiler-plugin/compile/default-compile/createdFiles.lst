@@ -2,3 +2,4 @@ com\bayron\pages\InventoryPage.class
 com\bayron\pages\LoginPage.class
 com\bayron\pages\BasePage.class
 com\bayron\pages\CartPage.class
+com\bayron\pages\CheckoutPage.class
