@@ -2,7 +2,8 @@ package com.bayron.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -16,8 +17,8 @@ import com.bayron.pages.InventoryPage;
 import com.bayron.pages.LoginPage;
 
 /**
- * Casos de prueba automatizados del sitio https://www.saucedemo.com/
- * Cada caso compara el resultado obtenido con el resultado esperado
+ * Casos de prueba automatizados del sitio https://www.saucedemo.com/ Cada caso
+ * compara el resultado obtenido con el resultado esperado
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SauceDemoTest extends BaseTest {
@@ -74,5 +75,20 @@ public class SauceDemoTest extends BaseTest {
         catalogo.irAlCarrito();
         List<String> productos = new CartPage(driver).obtenerProductos();
         assertEquals(List.of(PRODUCTO_NOMBRE), productos);
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("CP-05 Ordenar productos por precio de menor a mayor")
+    void cp05_ordenarPorPrecio() {
+        new LoginPage(driver).abrir().iniciarSesion(USUARIO_VALIDO, CLAVE);
+        InventoryPage catalogo = new InventoryPage(driver);
+        catalogo.ordenarPor("lohi");
+
+        List<Double> preciosObtenidos = catalogo.obtenerPrecios();
+        List<Double> preciosEsperados = new ArrayList<>(preciosObtenidos);
+        Collections.sort(preciosEsperados);
+
+        assertEquals(preciosEsperados, preciosObtenidos);
     }
 }
